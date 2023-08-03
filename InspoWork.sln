@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.API", "InspoWork.API\InspoWork.API.csproj", "{1CEBA925-DFC8-4D96-A52E-7830D8B12AB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Api", "InspoWork.Api\InspoWork.Api.csproj", "{1CEBA925-DFC8-4D96-A52E-7830D8B12AB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Common", "InspoWork.Common\InspoWork.Common.csproj", "{3E374A17-F95E-410C-A297-2E45FD6BD9BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Data", "InspoWork.Data\InspoWork.Data.csproj", "{38E27DC6-31A1-44E8-8495-79956FBEC2BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{3E374A17-F95E-410C-A297-2E45FD6BD9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E374A17-F95E-410C-A297-2E45FD6BD9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E374A17-F95E-410C-A297-2E45FD6BD9BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38E27DC6-31A1-44E8-8495-79956FBEC2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38E27DC6-31A1-44E8-8495-79956FBEC2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38E27DC6-31A1-44E8-8495-79956FBEC2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38E27DC6-31A1-44E8-8495-79956FBEC2BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

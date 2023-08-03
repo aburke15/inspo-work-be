@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace InspoWork.API.Controllers;
+namespace InspoWork.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
