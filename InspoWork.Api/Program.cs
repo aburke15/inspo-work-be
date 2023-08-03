@@ -1,6 +1,14 @@
+using InspoWork.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<IrohDbContext>(
+        options => options.UseInMemoryDatabase("iroh"));
+}
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

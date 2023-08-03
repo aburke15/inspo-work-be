@@ -1,4 +1,4 @@
-namespace InspoWork.API;
+namespace InspoWork.Api;
 
 public class WeatherForecast
 {
