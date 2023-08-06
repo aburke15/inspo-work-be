@@ -5,19 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 const string dbName = "iroh";
+var myConnectionString = builder.Configuration.GetConnectionString(dbName);
 
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddDbContext<IrohDbContext>(
-        options => options.UseInMemoryDatabase(dbName));
-}
-else
-{
-    var myConnectionString = builder.Configuration.GetConnectionString(dbName);
-    
-    builder.Services.AddDbContext<IrohDbContext>(options =>
-        options.UseNpgsql(myConnectionString));
-}
+builder.Services.AddDbContext<IrohDbContext>(options =>
+    options.UseNpgsql(myConnectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,12 +18,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
-
+// wrap this in an if statement and only show in dev env
 app.UseSwagger();
 app.UseSwaggerUI();
 
