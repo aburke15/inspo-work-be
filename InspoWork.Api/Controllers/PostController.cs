@@ -10,37 +10,42 @@ namespace InspoWork.Api.Controllers;
 [Route("api/v1/posts")]
 public class PostController : Controller
 {
+    private readonly ILogger<PostController> _logger;
     private readonly IrohDbContext _irohDbContext;
     
-    public PostController(IrohDbContext irohDbContext)
+    public PostController(ILogger<PostController> logger, IrohDbContext irohDbContext)
     {
+        _logger = logger;
         _irohDbContext = irohDbContext;
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllPostsAsync()
-    {
-        if (_irohDbContext.Posts != null) return Ok(await _irohDbContext.Posts.ToListAsync());
-        return NotFound();
-    }
+    public async Task<IActionResult> GetAllPostsAsync(CancellationToken ct) 
+        => Ok(await _irohDbContext.Posts.ToListAsync(ct));
 
-    [HttpGet("id:int")]
-    public async Task<IActionResult> GetPostByIdAsync([FromRoute] int id)
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetPostByIdAsync([FromRoute] int id, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        var post = await _irohDbContext.Posts.SingleOrDefaultAsync(p => p.Id == id, ct);
+
+        if (post is null)
+            return NotFound();
+
+        return Ok(post);
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreatePostAsync([FromBody] CreatePostRequestV1 request)
+    public async Task<IActionResult> CreatePostAsync([FromBody] CreatePostRequestV1 request, CancellationToken ct)
     {
         var post = new Post()
         {
             Title = request.Title,
-            Body = request.Body
+            Body = request.Body,
+            PostType = request.PostType
         };
 
-        await _irohDbContext.AddAsync(post);
-        await _irohDbContext.SaveChangesAsync();
+        await _irohDbContext.AddAsync(post, ct);
+        await _irohDbContext.SaveChangesAsync(ct);
 
         return CreatedAtRoute(new { id = post.Id }, post);
     }
