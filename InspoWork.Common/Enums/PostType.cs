@@ -4,5 +4,5 @@ public enum PostType
 {
     None,
     Inspiration,
-    Project
+    ProjectWork
 }
