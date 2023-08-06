@@ -4,10 +4,19 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+const string dbName = "iroh";
+
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<IrohDbContext>(
-        options => options.UseInMemoryDatabase("iroh"));
+        options => options.UseInMemoryDatabase(dbName));
+}
+else
+{
+    var myConnectionString = builder.Configuration.GetConnectionString(dbName);
+    
+    builder.Services.AddDbContext<IrohDbContext>(options =>
+        options.UseNpgsql(myConnectionString));
 }
 
 builder.Services.AddControllers();
