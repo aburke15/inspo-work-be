@@ -1,3 +1,4 @@
+using InspoWork.Api.Services;
 using InspoWork.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ var myConnectionString = builder.Configuration.GetConnectionString(dbName);
 
 builder.Services.AddDbContext<IrohDbContext>(options =>
     options.UseNpgsql(myConnectionString));
+
+builder.Services.AddTransient<IPostService, PostService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
