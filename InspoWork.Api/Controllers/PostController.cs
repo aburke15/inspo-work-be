@@ -1,8 +1,7 @@
 using InspoWork.Api.Requests;
-using InspoWork.Data;
+using InspoWork.Api.Services;
 using InspoWork.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace InspoWork.Api.Controllers;
 
@@ -11,22 +10,22 @@ namespace InspoWork.Api.Controllers;
 public class PostController : Controller
 {
     private readonly ILogger<PostController> _logger;
-    private readonly IrohDbContext _irohDbContext;
+    private readonly IPostService _postService;
     
-    public PostController(ILogger<PostController> logger, IrohDbContext irohDbContext)
+    public PostController(ILogger<PostController> logger, IPostService postService)
     {
         _logger = logger;
-        _irohDbContext = irohDbContext;
+        _postService = postService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAllPostsAsync(CancellationToken ct) 
-        => Ok(await _irohDbContext.Posts.ToListAsync(ct));
+        => Ok(await _postService.GetAllPostsAsync(ct));
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetPostByIdAsync([FromRoute] int id, CancellationToken ct)
     {
-        var post = await _irohDbContext.Posts.SingleOrDefaultAsync(p => p.Id == id, ct);
+        var post = await _postService.GetPostByIdAsync(id, ct);
 
         if (post is null)
             return NotFound();
@@ -37,15 +36,19 @@ public class PostController : Controller
     [HttpPost]
     public async Task<IActionResult> CreatePostAsync([FromBody] CreatePostRequestV1 request, CancellationToken ct)
     {
+        var postType = await _postService.GetPostTypeByValue((int) request.PostType, ct);
+
+        if (postType is null)
+            throw new InvalidOperationException("PostType cannot be null.");
+        
         var post = new Post()
         {
             Title = request.Title,
             Body = request.Body,
-            PostType = request.PostType
+            PostTypeId = postType.Id
         };
 
-        await _irohDbContext.AddAsync(post, ct);
-        await _irohDbContext.SaveChangesAsync(ct);
+        post = await _postService.CreatePostAsync(post, ct);
 
         return CreatedAtRoute(new { id = post.Id }, post);
     }
