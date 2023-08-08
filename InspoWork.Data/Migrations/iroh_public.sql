@@ -20,7 +20,6 @@ VALUES
     ('Inspiration', 1, 'User is looking for inspiration from other work.'),
     ('ProjectWork', 2, 'User wants to show off their work to potentially inspire others.');
 
-
 /*
  Author: Andre Burke
  Created Date: 2023-08-06

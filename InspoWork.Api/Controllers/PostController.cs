@@ -1,4 +1,5 @@
 using InspoWork.Api.Requests;
+using InspoWork.Api.Responses;
 using InspoWork.Api.Services;
 using InspoWork.Data.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -36,20 +37,40 @@ public class PostController : Controller
     [HttpPost]
     public async Task<IActionResult> CreatePostAsync([FromBody] CreatePostRequestV1 request, CancellationToken ct)
     {
-        var postType = await _postService.GetPostTypeByValue((int) request.PostType, ct);
-
-        if (postType is null)
-            throw new InvalidOperationException("PostType cannot be null.");
-        
-        var post = new Post()
+        try
         {
-            Title = request.Title,
-            Body = request.Body,
-            PostTypeId = postType.Id
-        };
+            var postType = await _postService.GetPostTypeByValue((int) request.PostType, ct);
 
-        post = await _postService.CreatePostAsync(post, ct);
+            if (postType is null)
+                throw new InvalidOperationException("PostType cannot be null.");
+        
+            var post = new Post()
+            {
+                Title = request.Title,
+                Body = request.Body,
+                PostTypeId = postType.Id
+            };
 
-        return CreatedAtRoute(new { id = post.Id }, post);
+            post = await _postService.CreatePostAsync(post, ct);
+
+            var response = new PostResponseV1()
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Body = post.Body,
+                PostType = new PostTypeResponseV1()
+                {
+                    PostTypeName = post?.PostType?.PostTypeName ?? "None",
+                    PostTypeValue = post?.PostType?.PostTypeValue ?? 0
+                }
+            };
+
+            return CreatedAtRoute(new { id = response.Id }, response);
+        }
+        catch (Exception e)
+        {
+            _logger.LogWarning(e, "Something went wrong trying to create a post.");
+            throw;
+        }
     }
 }

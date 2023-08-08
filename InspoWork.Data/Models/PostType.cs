@@ -1,6 +1,6 @@
 namespace InspoWork.Data.Models;
 
-public class PostType
+public sealed class PostType
 {
     public int Id { get; set; }
     public int PostTypeValue { get; set; }
