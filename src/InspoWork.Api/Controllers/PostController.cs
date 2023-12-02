@@ -1,7 +1,7 @@
 using InspoWork.Api.Requests;
 using InspoWork.Api.Responses;
-using InspoWork.Api.Services;
 using InspoWork.Data.Models;
+using InspoWork.Services.Posts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InspoWork.Api.Controllers;

@@ -14,8 +14,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\InspoWork.Services\InspoWork.Services.csproj" />
       <ProjectReference Include="..\InspoWork.Common\InspoWork.Common.csproj" />
       <ProjectReference Include="..\InspoWork.Data\InspoWork.Data.csproj" />
+      <ProjectReference Include="..\InspoWork.Services\InspoWork.Services.csproj" />
     </ItemGroup>
 
 
