@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Api", "src\InspoWork.Api\InspoWork.Api.csproj", "{1CEBA925-DFC8-4D96-A52E-7830D8B12AB4}"
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Api", "src\InspoWork.Api\InspoWork.Api.csproj", "{EEDBE73A-B63A-4218-A055-A5CE5E87B8A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Common", "src\InspoWork.Common\InspoWork.Common.csproj", "{3E374A17-F95E-410C-A297-2E45FD6BD9BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Common", "src\InspoWork.Common\InspoWork.Common.csproj", "{D650B62D-EFB9-4719-83FA-81E49446591C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Data", "src\InspoWork.Data\InspoWork.Data.csproj", "{38E27DC6-31A1-44E8-8495-79956FBEC2BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Data", "src\InspoWork.Data\InspoWork.Data.csproj", "{C34D4844-D82A-410E-B8D8-9D76436331CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Services", "src\InspoWork.Services\InspoWork.Services.csproj", "{D446C2A5-F877-48B8-B397-1BE448F7CE2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,25 @@ Global
 		{38E27DC6-31A1-44E8-8495-79956FBEC2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38E27DC6-31A1-44E8-8495-79956FBEC2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38E27DC6-31A1-44E8-8495-79956FBEC2BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9163305-B36C-498D-B857-1DC61873BC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9163305-B36C-498D-B857-1DC61873BC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9163305-B36C-498D-B857-1DC61873BC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9163305-B36C-498D-B857-1DC61873BC46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDBE73A-B63A-4218-A055-A5CE5E87B8A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDBE73A-B63A-4218-A055-A5CE5E87B8A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDBE73A-B63A-4218-A055-A5CE5E87B8A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDBE73A-B63A-4218-A055-A5CE5E87B8A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D650B62D-EFB9-4719-83FA-81E49446591C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D650B62D-EFB9-4719-83FA-81E49446591C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D650B62D-EFB9-4719-83FA-81E49446591C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D650B62D-EFB9-4719-83FA-81E49446591C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34D4844-D82A-410E-B8D8-9D76436331CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34D4844-D82A-410E-B8D8-9D76436331CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34D4844-D82A-410E-B8D8-9D76436331CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34D4844-D82A-410E-B8D8-9D76436331CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D446C2A5-F877-48B8-B397-1BE448F7CE2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D446C2A5-F877-48B8-B397-1BE448F7CE2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D446C2A5-F877-48B8-B397-1BE448F7CE2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D446C2A5-F877-48B8-B397-1BE448F7CE2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

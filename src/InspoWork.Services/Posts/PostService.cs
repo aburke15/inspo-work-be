@@ -1,37 +1,38 @@
 using InspoWork.Data;
 using InspoWork.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
-namespace InspoWork.Api.Services;
+namespace InspoWork.Services.Posts;
 
 public class PostService : IPostService
 {
-    private readonly IrohDbContext _irohDbContext;
+    private readonly InspoWorkDbContext _inspoWorkDbContext;
     private readonly ILogger<PostService> _logger;
     
-    public PostService(IrohDbContext irohDbContext, ILogger<PostService> logger)
+    public PostService(InspoWorkDbContext inspoWorkDbContext, ILogger<PostService> logger)
     {
-        _irohDbContext = irohDbContext;
+        _inspoWorkDbContext = inspoWorkDbContext;
         _logger = logger;
     }
     
     public async Task<Post> CreatePostAsync(Post post, CancellationToken ct = default)
     {
-        await _irohDbContext.Posts.AddAsync(post, ct);
-        await _irohDbContext.SaveChangesAsync(ct);
+        await _inspoWorkDbContext.Posts.AddAsync(post, ct);
+        await _inspoWorkDbContext.SaveChangesAsync(ct);
         
         return post;
     }
 
     public async Task<IEnumerable<Post>> GetAllPostsAsync(CancellationToken ct = default) 
-        => await _irohDbContext.Posts.ToListAsync(ct);
+        => await _inspoWorkDbContext.Posts.ToListAsync(ct);
 
     public async Task<Post?> GetPostByIdAsync(int id, CancellationToken ct = default) 
-        => await _irohDbContext.Posts.SingleOrDefaultAsync(post => post.Id == id, ct);
+        => await _inspoWorkDbContext.Posts.SingleOrDefaultAsync(post => post.Id == id, ct);
 
     public async Task<PostType?> GetPostTypeByValue(int value, CancellationToken ct = default)
     {
-        return await _irohDbContext.PostTypes
+        return await _inspoWorkDbContext.PostTypes
             .SingleOrDefaultAsync(pt => pt.PostTypeValue == value, ct);
     }
 }

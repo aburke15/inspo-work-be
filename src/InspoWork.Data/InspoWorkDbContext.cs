@@ -3,10 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InspoWork.Data;
 
-public class IrohDbContext : DbContext
+public class InspoWorkDbContext : DbContext
 {
-    public IrohDbContext(DbContextOptions<IrohDbContext> options)
-        : base(options)
+    public InspoWorkDbContext(DbContextOptions<InspoWorkDbContext> options) : base(options)
     { }
 
     public DbSet<PostType> PostTypes { get; set; } = null!;

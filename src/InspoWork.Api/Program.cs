@@ -1,14 +1,14 @@
-using InspoWork.Api.Services;
 using InspoWork.Data;
+using InspoWork.Services.Posts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-const string dbName = "iroh";
+const string dbName = "inspo_work";
 var myConnectionString = builder.Configuration.GetConnectionString(dbName);
 
-builder.Services.AddDbContext<IrohDbContext>(options =>
+builder.Services.AddDbContext<InspoWorkDbContext>(options =>
     options.UseNpgsql(myConnectionString));
 
 builder.Services.AddTransient<IPostService, PostService>();

@@ -1,6 +1,6 @@
 using InspoWork.Data.Models;
 
-namespace InspoWork.Api.Services;
+namespace InspoWork.Services.Posts;
 
 public interface IPostService
 {
