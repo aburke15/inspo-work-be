@@ -1,7 +1,5 @@
-﻿using System.Runtime.CompilerServices;
-using InspoWork.Data.Models;
+﻿using InspoWork.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace InspoWork.Data;
 

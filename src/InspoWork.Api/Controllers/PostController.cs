@@ -69,7 +69,7 @@ public class PostController : Controller
         }
         catch (Exception e)
         {
-            _logger.LogWarning(e, "Something went wrong trying to create a post.");
+            _logger.LogWarning(e, "Something went wrong during post creation.");
             throw;
         }
     }
