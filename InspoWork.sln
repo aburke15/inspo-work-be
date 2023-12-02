@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Api", "InspoWork.Api\InspoWork.Api.csproj", "{1CEBA925-DFC8-4D96-A52E-7830D8B12AB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Api", "src\InspoWork.Api\InspoWork.Api.csproj", "{1CEBA925-DFC8-4D96-A52E-7830D8B12AB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Common", "InspoWork.Common\InspoWork.Common.csproj", "{3E374A17-F95E-410C-A297-2E45FD6BD9BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Common", "src\InspoWork.Common\InspoWork.Common.csproj", "{3E374A17-F95E-410C-A297-2E45FD6BD9BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Data", "InspoWork.Data\InspoWork.Data.csproj", "{38E27DC6-31A1-44E8-8495-79956FBEC2BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspoWork.Data", "src\InspoWork.Data\InspoWork.Data.csproj", "{38E27DC6-31A1-44E8-8495-79956FBEC2BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
