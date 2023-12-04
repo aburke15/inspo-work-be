@@ -1,5 +1,5 @@
-using InspoWork.Api.Requests;
-using InspoWork.Api.Responses;
+using InspoWork.Common.Models.Requests;
+using InspoWork.Common.Models.Responses;
 using InspoWork.Data.Models;
 using InspoWork.Services.Posts;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +20,11 @@ public class PostController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllPostsAsync(CancellationToken ct) 
+    public async Task<IActionResult> Get(CancellationToken ct) 
         => Ok(await _postService.GetAllPostsAsync(ct));
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetPostByIdAsync([FromRoute] int id, CancellationToken ct)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetPostByIdAsync([FromRoute] string id, CancellationToken ct)
     {
         var post = await _postService.GetPostByIdAsync(id, ct);
 
@@ -43,27 +43,8 @@ public class PostController : Controller
 
             if (postType is null)
                 throw new InvalidOperationException("PostType cannot be null.");
-        
-            var post = new Post()
-            {
-                Title = request.Title,
-                Body = request.Body,
-                PostTypeId = postType.Id
-            };
 
-            post = await _postService.CreatePostAsync(post, ct);
-
-            var response = new PostResponseV1()
-            {
-                Id = post.Id,
-                Title = post.Title,
-                Body = post.Body,
-                PostType = new PostTypeResponseV1()
-                {
-                    PostTypeName = post?.PostType?.PostTypeName ?? "None",
-                    PostTypeValue = post?.PostType?.PostTypeValue ?? 0
-                }
-            };
+            var response = await _postService.CreatePostAsync(request, ct);
 
             return CreatedAtRoute(new { id = response.Id }, response);
         }

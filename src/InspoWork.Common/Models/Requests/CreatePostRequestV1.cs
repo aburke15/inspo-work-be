@@ -1,6 +1,6 @@
 using InspoWork.Common.Enums;
 
-namespace InspoWork.Api.Requests;
+namespace InspoWork.Common.Models.Requests;
 
 public class CreatePostRequestV1
 {

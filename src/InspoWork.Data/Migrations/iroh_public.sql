@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS post_types (
 INSERT INTO post_types (post_type_name, post_type_value, description)
 VALUES
     ('None', 0, 'Default of None if a value was not provided for the post type.'),
-    ('Inspiration', 1, 'User is looking for inspiration from other work.'),
-    ('ProjectWork', 2, 'User wants to show off their work to potentially inspire others.');
+    ('Inspiration', 1, 'Looking for inspiration from other work.'),
+    ('ProjectWork', 2, 'Show off your work to potentially inspire others.');
 
 /*
  Author: Andre Burke
