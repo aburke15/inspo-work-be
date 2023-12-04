@@ -1,11 +1,12 @@
-using InspoWork.Data.Models;
+using InspoWork.Common.Models.Requests;
+using InspoWork.Common.Models.Responses;
 
 namespace InspoWork.Services.Posts;
 
 public interface IPostService
 {
-    Task<Post> CreatePostAsync(Post post, CancellationToken ct = default);
-    Task<IEnumerable<Post>> GetAllPostsAsync(CancellationToken ct = default);
-    Task<Post?> GetPostByIdAsync(int id, CancellationToken ct = default);
-    Task<PostType?> GetPostTypeByValue(int value, CancellationToken ct = default);
+    Task<PostResponseV1> CreatePostAsync(CreatePostRequestV1 post, CancellationToken ct = default);
+    Task<IEnumerable<PostResponseV1>> GetAllPostsAsync(CancellationToken ct = default);
+    Task<PostResponseV1?> GetPostByIdAsync(string id, CancellationToken ct = default);
+    Task<PostTypeResponseV1?> GetPostTypeByValue(int value, CancellationToken ct = default);
 }
