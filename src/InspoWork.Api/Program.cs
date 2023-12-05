@@ -5,16 +5,31 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-const string dbName = "inspo_work";
-var myConnectionString = builder.Configuration.GetConnectionString(dbName);
+var env = builder.Configuration.GetValue<string>("env");
+var mongoUri = builder.Configuration.GetValue<string>("MONGO_URI");
+var dbName = builder.Configuration.GetValue<string>("DatabaseName");
+
+if (string.IsNullOrWhiteSpace(env) || string.IsNullOrWhiteSpace(mongoUri) || string.IsNullOrWhiteSpace(dbName))
+{
+    Environment.Exit(1);
+}
+
+dbName += env.ToLower() switch
+{
+    "local" => env,
+    "development" => env,
+    "production" => env,
+    _ => throw new NotSupportedException($"Env value not supported: {env}")
+};
 
 builder.Services.AddDbContext<InspoWorkDbContext>(options =>
-    options.UseNpgsql(myConnectionString));
+    options.UseMongoDB(mongoUri, dbName));
 
 builder.Services.AddTransient<IPostService, PostService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
