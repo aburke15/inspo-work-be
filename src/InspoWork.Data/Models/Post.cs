@@ -6,7 +6,7 @@ namespace InspoWork.Data.Models;
 public sealed class Post
 {
     [BsonElement("_id")]
-    public ObjectId Id { get; set; }
+    public ObjectId PostId { get; set; }
     public string? Title { get; set; }
     public string? Body { get; set; }
     public int PostTypeId { get; set; }

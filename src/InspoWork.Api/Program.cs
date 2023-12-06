@@ -14,7 +14,7 @@ if (string.IsNullOrWhiteSpace(env) || string.IsNullOrWhiteSpace(mongoUri) || str
     Environment.Exit(1);
 }
 
-dbName += env.ToLower() switch
+dbName += "_" + env.ToLower() switch
 {
     "local" => env,
     "development" => env,
