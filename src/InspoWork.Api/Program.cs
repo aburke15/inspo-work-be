@@ -5,25 +5,25 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var env = builder.Configuration.GetValue<string>("env");
-var mongoUri = builder.Configuration.GetValue<string>("MONGO_URI");
-var dbName = builder.Configuration.GetValue<string>("DatabaseName");
+var env = builder.Configuration["env"];
+var connectionString = builder.Configuration["MONGO_URI"];
+var dbName = builder.Configuration["DatabaseName"];
 
-if (string.IsNullOrWhiteSpace(env) || string.IsNullOrWhiteSpace(mongoUri) || string.IsNullOrWhiteSpace(dbName))
+if (string.IsNullOrWhiteSpace(env) || string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(dbName))
 {
-    Environment.Exit(1);
+    Environment.Exit(0);
 }
 
 dbName += "_" + env.ToLower() switch
 {
     "local" => env,
-    "development" => env,
-    "production" => env,
+    "dev" => env,
+    "prod" => env,
     _ => throw new NotSupportedException($"Env value not supported: {env}")
 };
 
 builder.Services.AddDbContext<InspoWorkDbContext>(options =>
-    options.UseMongoDB(mongoUri, dbName));
+    options.UseMongoDB(connectionString, dbName));
 
 builder.Services.AddTransient<IPostService, PostService>();
 

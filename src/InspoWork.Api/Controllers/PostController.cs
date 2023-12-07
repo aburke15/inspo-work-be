@@ -39,14 +39,8 @@ public class PostController : Controller
     {
         try
         {
-            var postType = await _postService.GetPostTypeByValueAsync((int) request.PostType, ct);
-
-            if (postType is null)
-                throw new InvalidOperationException("PostType cannot be null.");
-
             var response = await _postService.CreatePostAsync(request, ct);
-
-            return CreatedAtRoute(new { id = response.PostId }, response);
+            return CreatedAtRoute(new { id = response.Id }, response);
         }
         catch (Exception e)
         {

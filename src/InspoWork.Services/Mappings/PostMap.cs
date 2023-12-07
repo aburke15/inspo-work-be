@@ -6,7 +6,28 @@ namespace InspoWork.Services.Mappings;
 
 public static class PostMap
 {
-    public static PostType RequestToPostType(CreatePostTypeRequestV1 request)
+    public static Post RequestToPost(CreatePostRequestV1 request)
+    {
+        return new Post
+        {
+            Title = request.Title,
+            Body = request.Body,
+            PostType = RequestToPostType(request.PostType)
+        };
+    }
+
+    public static PostResponseV1 PostToResponse(Post post)
+    {
+        return new PostResponseV1
+        {
+            Id = $"{post.Id}",
+            Title = post.Title,
+            Body = post.Body,
+            PostType = PostTypeToResponse(post.PostType)
+        };
+    }
+
+    private static PostType RequestToPostType(CreatePostTypeRequestV1 request)
     {
         return new PostType
         {
@@ -16,11 +37,10 @@ public static class PostMap
         };
     }
 
-    public static PostTypeResponseV1 PostTypeToResponse(PostType postType)
+    private static PostTypeResponseV1 PostTypeToResponse(PostType postType)
     {
         return new PostTypeResponseV1
         {
-            PostTypeId = postType.PostTypeId.ToString()!,
             Value = postType.Value,
             Name = postType.Name,
             Description = postType.Description

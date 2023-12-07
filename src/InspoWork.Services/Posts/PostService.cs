@@ -23,18 +23,11 @@ public class PostService : IPostService
     
     public async Task<PostResponseV1> CreatePostAsync(CreatePostRequestV1 request, CancellationToken ct = default)
     {
-        var post = new Post
-        {
-            
-        };
-        
-        await _inspoWorkDbContext.Posts.AddAsync(post, ct);
+        var entity = PostMap.RequestToPost(request);
+        var post = await _inspoWorkDbContext.Set<Post>().AddAsync(entity, ct);
         await _inspoWorkDbContext.SaveChangesAsync(ct);
 
-        return new PostResponseV1
-        {
-
-        };
+        return PostMap.PostToResponse(post.Entity);
     }
 
     public async Task<IEnumerable<PostResponseV1>> GetAllPostsAsync(CancellationToken ct = default)
@@ -45,42 +38,32 @@ public class PostService : IPostService
 
     public async Task<PostResponseV1?> GetPostByIdAsync(string id, CancellationToken ct = default)
     {
-        var objectId = new ObjectId(id);
-
         var post = await _inspoWorkDbContext.Posts
             .Include(post => post.PostType)
-            .SingleOrDefaultAsync(p => p.PostId == objectId, ct);
+            .SingleOrDefaultAsync(p => p.Id == new ObjectId(id), ct);
 
-        if (post is null)
-            return null;
-
-        return new PostResponseV1
-        {
-            PostId = post.PostId.ToString()!,
-            Title = post.Title,
-            Body = post.Body,
-            PostType = new PostTypeResponseV1
-            {
-                PostTypeId = post.PostType?.PostTypeId.ToString()!,
-                Name = post.PostType!.Name,
-                Value = post.PostType.Value
-            }
-        };
+        return post is null ? null : PostMap.PostToResponse(post);
     }
 
     public async Task<PostTypeResponseV1?> GetPostTypeByValueAsync(int value, CancellationToken ct = default)
     {
-        var postType = await _inspoWorkDbContext.PostTypes
-            .SingleOrDefaultAsync(pt => pt.Value == value, ct);
-
-        if (postType is null)
-            return null;
-
-        return new PostTypeResponseV1()
-        {
-            PostTypeId = postType.PostTypeId.ToString()!,
-        };
+        await Task.Delay(100, ct);
+        throw new NotImplementedException();
     }
+
+    // public async Task<PostTypeResponseV1?> GetPostTypeByValueAsync(int value, CancellationToken ct = default)
+    // {
+    //     var postType = await _inspoWorkDbContext.PostTypes
+    //         .SingleOrDefaultAsync(pt => pt.Value == value, ct);
+    //
+    //     if (postType is null)
+    //         return null;
+    //
+    //     return new PostTypeResponseV1()
+    //     {
+    //         PostTypeId = postType.PostTypeId.ToString()!,
+    //     };
+    // }
 
     public async Task<IEnumerable<PostTypeResponseV1>> GetAllPostTypesAsync(CancellationToken ct = default)
     {
@@ -90,11 +73,17 @@ public class PostService : IPostService
 
     public async Task<PostTypeResponseV1> CreatePostTypeAsync(CreatePostTypeRequestV1 request, CancellationToken ct)
     {
-        var postType = PostMap.RequestToPostType(request);
-
-        await _inspoWorkDbContext.AddAsync(postType, ct);
-        await _inspoWorkDbContext.SaveChangesAsync(ct);
-
-        return PostMap.PostTypeToResponse(postType);
+        await Task.Delay(100, ct);
+        throw new NotImplementedException();
     }
+
+    // public async Task<PostTypeResponseV1> CreatePostTypeAsync(CreatePostTypeRequestV1 request, CancellationToken ct)
+    // {
+    //     var postType = PostMap.RequestToPostType(request);
+    //
+    //     await _inspoWorkDbContext.PostTypes.AddAsync(postType, ct);
+    //     await _inspoWorkDbContext.SaveChangesAsync(ct);
+    //
+    //     return PostMap.PostTypeToResponse(postType);
+    // }
 }
