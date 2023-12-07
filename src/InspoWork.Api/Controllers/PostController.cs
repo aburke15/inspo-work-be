@@ -24,7 +24,7 @@ public class PostController : Controller
         => Ok(await _postService.GetAllPostsAsync(ct));
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetPostByIdAsync([FromRoute] string id, CancellationToken ct)
+    public async Task<IActionResult> Get([FromRoute] string id, CancellationToken ct)
     {
         var post = await _postService.GetPostByIdAsync(id, ct);
 
@@ -35,22 +35,31 @@ public class PostController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreatePostAsync([FromBody] CreatePostRequestV1 request, CancellationToken ct)
+    public async Task<IActionResult> Create([FromBody] CreatePostRequestV1 request, CancellationToken ct)
     {
         try
         {
-            var postType = await _postService.GetPostTypeByValue((int) request.PostType, ct);
-
-            if (postType is null)
-                throw new InvalidOperationException("PostType cannot be null.");
-
             var response = await _postService.CreatePostAsync(request, ct);
-
             return CreatedAtRoute(new { id = response.Id }, response);
         }
         catch (Exception e)
         {
             _logger.LogWarning(e, "Something went wrong during post creation.");
+            throw;
+        }
+    }
+
+    [HttpPost("post-types")]
+    public async Task<IActionResult> Create([FromBody] CreatePostTypeRequestV1 request, CancellationToken ct = default)
+    {
+        try
+        {
+            var response = await _postService.CreatePostTypeAsync(request, ct);
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            _logger.LogWarning(e, "Something went wrong during post type creation.");
             throw;
         }
     }
