@@ -2,7 +2,7 @@ using InspoWork.Common.Models.Requests;
 using InspoWork.Common.Models.Responses;
 using InspoWork.Data.Models;
 
-namespace InspoWork.Services.Mappings;
+namespace InspoWork.Common.Mappings;
 
 public static class PostMap
 {

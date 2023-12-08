@@ -45,7 +45,7 @@ public class PostController : Controller
         catch (Exception e)
         {
             _logger.LogWarning(e, "Something went wrong during post creation.");
-            throw;
+            return StatusCode(500);
         }
     }
 

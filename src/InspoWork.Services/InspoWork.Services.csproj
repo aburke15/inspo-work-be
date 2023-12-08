@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\InspoWork.Common\InspoWork.Common.csproj" />
       <ProjectReference Include="..\InspoWork.Data\InspoWork.Data.csproj" />
       <ProjectReference Include="..\src\InspoWork.Data\InspoWork.Data.csproj" />
     </ItemGroup>

@@ -10,5 +10,13 @@
       <Folder Include="Models\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\InspoWork.Data\InspoWork.Data.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
+    </ItemGroup>
+
 
 </Project>
